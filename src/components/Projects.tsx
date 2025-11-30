@@ -18,9 +18,9 @@ const Projects = () => {
       title: 'NASA Space Apps - Meteor Madness',
       description: ' NEOScope is a near Earth object visualization tool for viewing orbital paths of potentially hazardous asteroids, the consequences of their impact with Earth, and for simulating potential mitigation strategies. We used NASA databases such as the Small- Body Database Query and Sentry: Earth Impacts to filter over 1.5 million data points and extract the data required to map the trajectories and calculate impact magnitudes of 40 asteroids using Euclidean Keplerian Orbital mechanics.',
       images: [
-        '/src/resources/3D Viz.png',
-        '/src/resources/Impact Sim.png',
-        '/src/resources/NASA Space Apps Website Pic 3.png'
+        '/3D Viz.png',
+        '/Impact Sim.png',
+        '/NASA Space Apps Website Pic 3.png'
       ],
       captions: [
         'NASA Space Apps - 3D Visualization',
@@ -32,7 +32,7 @@ const Projects = () => {
       id: 2,
       title: 'UTAT Satellite Path Simulation',
       description: 'Using STK 12, MATLAB, and Pandas + NumPy to generate satellite attitude profiles that keep a specified body face (camera) continuously pointed away from the Sun while allowing controlled roll rotations around the Sun direction. It computes Sun position vectors in the ICRF frame for given dates, constructs rotation matrices/quaternions that maintain direction opposite to the Sun with parameterized roll angles, and outputs the data in both CSV and STK-compatible formats.',
-      images: ['/src/resources/UTAT Picture.png'],
+      images: ['/UTAT Picture.png'],
       captions: ['Orbital trajectory visualization', 'Simulation control panel']
     },
     {
@@ -40,8 +40,8 @@ const Projects = () => {
       title: 'Prosthetic Leg Redesign',
       description: 'Incorporated variable stiffness actuators into prosthetic leg design to add adjustable tension capabilities while significantly reducing overall weight and cost compared to market alternatives.',
       images: [
-        '/src/resources/Prosthetic Leg Proj Pic 1.png',
-        '/src/resources/Prosthetic Leg Proj Results.png'
+        '/Prosthetic Leg Proj Pic 1.png',
+        '/Prosthetic Leg Proj Results.png'
       ],
       captions: ['Prototype', 'Results']
     },
@@ -49,7 +49,7 @@ const Projects = () => {
       id: 4,
       title: 'F1Tenth Competition',
       description: 'Using Autodrive, ROS2, and Reinforcement Learning to develop an autonomous racing vehicle for the F1Tenth competition.',
-      images: ['/src/resources/F1Tenth.png'],
+      images: ['/F1Tenth.png'],
       captions: ['Vehicle on track']
     },
     {
@@ -57,8 +57,8 @@ const Projects = () => {
       title: 'Robotic Arm',
       description: 'Formulating and 3D designing a 6-DOF robotic arm using Solidworks',
       images: [
-        '/src/resources/Solidworks 1.png',
-        '/src/resources/Solidworks 2.png'
+        '/Solidworks 1.png',
+        '/Solidworks 2.png'
       ],
       captions: ['Robotic arm assembly', 'Drawings']
     },
@@ -66,7 +66,7 @@ const Projects = () => {
       id: 6,
       title: 'Spotify Playlist Cleaner',
       description: 'Swipe right to keep, left to remove. Filter by playlist, date, artist, and more. In progress.',
-      images: ['/src/resources/Spotify Logo.png'],
+      images: ['/Spotify Logo.png'],
       captions: ['Coming soon']
     }
   ]

@@ -98,7 +98,7 @@ const Navigation = ({ darkMode, toggleDarkMode }: NavigationProps) => {
             className="hover:opacity-80 transition-opacity -ml-12"
             aria-label="Scroll to top"
           >
-            <img src="/src/resources/fighter-jet-logo.png" alt="Logo" className="h-10 w-auto" />
+            <img src="/fighter-jet-logo.png" alt="Logo" className="h-10 w-auto" />
           </button>
           
           <div className="flex items-center gap-8">

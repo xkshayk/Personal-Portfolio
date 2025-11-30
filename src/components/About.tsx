@@ -7,7 +7,7 @@ const About = () => {
         <div className="grid md:grid-cols-2 gap-4 mb-16">
           {/* Profile Image */}
           <div className="flex items-start justify-start">
-            <img src="/src/resources/Akshay Aquarium.png" alt="Profile" className="w-[420px] h-[420px] rounded-lg object-cover" />
+            <img src="/Akshay Aquarium.png" alt="Profile" className="w-[420px] h-[420px] rounded-lg object-cover" />
           </div>
           
           {/* Bio */}
