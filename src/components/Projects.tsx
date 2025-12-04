@@ -117,7 +117,7 @@ const Projects = () => {
               const currentIndex = currentImageIndex[project.id] || 0
               return (
                 <div key={project.id}>
-                  <div className="rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-4 border-gray-800 dark:border-gray-300">
+                  <div className="rounded-2xl shadow-lg hover:shadow-2xl dark:shadow-white/20 dark:hover:shadow-white/30 transition-all duration-300 overflow-hidden border-4 border-gray-800 dark:border-gray-300">
                     <div className="bg-gradient-to-br from-cyan-200/30 via-blue-200/30 to-teal-200/30 dark:from-slate-950/30 dark:via-blue-900/30 dark:to-cyan-900/30 backdrop-blur-lg rounded-xl overflow-hidden">
                       <div className="flex flex-col md:flex-row">
                         {/* Left side - Text content */}
@@ -212,7 +212,7 @@ const Projects = () => {
                   {project.id === 5 && Canvas && components && (
                     <>
                       <h4 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mt-8 mb-4">Final 3D Model:</h4>
-                      <div className="w-full h-[500px] bg-gradient-to-br from-gray-100 to-gray-200 dark:from-slate-900 dark:to-slate-800 rounded-xl shadow-2xl overflow-hidden">
+                      <div className="w-full h-[500px] bg-gradient-to-br from-gray-100 to-gray-200 dark:from-slate-900 dark:to-slate-800 rounded-xl shadow-2xl dark:shadow-white/30 overflow-hidden">
                       <Canvas>
                         <Suspense fallback={null}>
                           <components.PerspectiveCamera makeDefault position={[3, 3, 3]} />

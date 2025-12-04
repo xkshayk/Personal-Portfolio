@@ -31,7 +31,7 @@ const About = () => {
             href="/Akshay_Kolwalkar_Resume_Tech.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white text-lg font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+            className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white text-lg font-semibold rounded-lg shadow-lg hover:shadow-xl dark:shadow-white/20 dark:hover:shadow-white/30 transition-all duration-200 transform hover:scale-105"
           >
             Resume
           </a>
