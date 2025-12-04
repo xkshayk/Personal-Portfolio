@@ -91,24 +91,24 @@ const Navigation = ({ darkMode, toggleDarkMode }: NavigationProps) => {
   ]
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md">
+    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md overflow-x-auto">
       <div className="max-w-7xl mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4 min-w-max">
           <button
             onClick={scrollToTop}
-            className="hover:opacity-80 transition-opacity -ml-12"
+            className="hover:opacity-80 transition-opacity flex-shrink-0"
             aria-label="Scroll to top"
           >
             <img src="/fighter-jet-logo.png" alt="Logo" className="h-10 w-auto" />
           </button>
           
-          <div className="flex items-center gap-8">
-            <ul className="flex gap-8">
+          <div className="flex items-center gap-4 md:gap-8">
+            <ul className="flex gap-4 md:gap-8">
               {navItems.map((item) => (
                 <li key={item.id}>
                   <button
                     onClick={() => scrollToSection(item.id)}
-                    className={`text-xl font-bold transition-colors px-3 py-2 rounded-lg ${
+                    className={`text-lg md:text-xl font-bold transition-colors px-2 md:px-3 py-2 rounded-lg whitespace-nowrap ${
                       activeSection === item.id
                         ? 'text-primary-600 dark:text-primary-400'
                         : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100'
@@ -123,7 +123,7 @@ const Navigation = ({ darkMode, toggleDarkMode }: NavigationProps) => {
             {/* Dark mode toggle */}
             <button
               onClick={toggleDarkMode}
-              className="p-3 rounded-lg bg-gradient-to-br from-cyan-200/60 via-blue-200/60 to-teal-200/60 dark:from-slate-950/60 dark:via-blue-900/60 dark:to-cyan-900/60 backdrop-blur-sm hover:from-cyan-200/80 hover:via-blue-200/80 hover:to-teal-200/80 dark:hover:from-slate-950/80 dark:hover:via-blue-900/80 dark:hover:to-cyan-900/80 transition-all"
+              className="p-3 rounded-lg bg-gradient-to-br from-cyan-200/60 via-blue-200/60 to-teal-200/60 dark:from-slate-950/60 dark:via-blue-900/60 dark:to-cyan-900/60 backdrop-blur-sm hover:from-cyan-200/80 hover:via-blue-200/80 hover:to-teal-200/80 dark:hover:from-slate-950/80 dark:hover:via-blue-900/80 dark:hover:to-cyan-900/80 transition-all flex-shrink-0"
               aria-label="Toggle dark mode"
               title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
             >
