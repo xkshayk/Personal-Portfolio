@@ -1,6 +1,6 @@
 const About = () => {
   return (
-    <section id="about" className="min-h-screen py-20 px-6">
+    <section id="about" className="min-h-screen py-32 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="relative">
           <h2 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-16">About Me</h2>
@@ -15,7 +15,7 @@ const About = () => {
           {/* Bio */}
           <div className="flex flex-col justify-start items-start">
             <p className="text-xl md:text-2xl text-gray-900 dark:text-gray-100 leading-relaxed font-light text-left">
-              I'm a Mechanical Engineer student at the University of Toronto with a passion for aerodynamics and competiton. In the future I hope I can combine these interests in a career I love. I've outlined some of the projects I've been lucky enough to be a part of so far, and any feedback or just discussion would be awesome. 
+              I'm a Mechanical Engineer student at the University of Toronto with a passion for aerodynamics and competiton. In the future I hope I can combine these interests in a career I love, like working for an F1 team or fighter jet development. I've outlined some of the projects I've been lucky enough to be a part of so far, and any feedback or just discussion would be awesome. 
             </p>
           </div>
           

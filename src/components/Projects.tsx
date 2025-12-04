@@ -64,30 +64,12 @@ const Projects = () => {
     {
       id: 2,
       title: 'UTAT Satellite Path Simulation',
-      description: 'This project is an attitude planning and guidance package for the UTAT ADCS team supporting the FINCH satellite mission. It generates satellite attitude profiles using NASA SPICE ephemeris for dual-mode operations: sun-pointing (power generation via solar arrays) and target tracking (hyperspectral crop imaging). FINCH (Field Imaging Nanosatellite for Crop residue Hyperspectral mapping) is a 3U CubeSat demonstrating Volume Phase Holographic (VPH) grism technology for SWIR hyperspectral remote sensing of agricultural crop residue. \nLaunch target: Q3 2028. \n NASA SPICE toolkit via SpiceyPy Python wrapper, DE440 latest planetary ephemeris kernels, ICRF/J2000 Earth-centered inertial reference frame, Hamiltonian scalar-first quaternions [w,x,y,z] for Tensortech ADCS 10m compatibility, pickle-based hourly ephemeris caching, mode switching logic with battery/rate/exclusion zone safety constraints, STK `.a` attitude file export format.',
-      images: ['/UTAT Picture.png'],
-      captions: ['Orbital trajectory visualization', 'Simulation control panel']
+      description: 'This project is an attitude planning and guidance package for the UTAT ADCS team supporting the FINCH satellite mission. It generates satellite attitude profiles using NASA SPICE ephemeris for dual-mode operations: sun-pointing (power generation via solar arrays) and target tracking (hyperspectral crop imaging). FINCH (Field Imaging Nanosatellite for Crop residue Hyperspectral mapping) is a 3U CubeSat demonstrating Volume Phase Holographic (VPH) grism technology for SWIR hyperspectral remote sensing of agricultural crop residue. \nLaunch target: Q3 2028. Using NASA SPICE toolkit via SpiceyPy Python wrapper in DE440 for planetary ephemeris kernels, ICRF/J2000 Earth-centered inertial reference frame, Hamiltonian scalar-first quaternions [w,x,y,z] for Tensortech ADCS 10m compatibility, pickle-based hourly ephemeris caching, mode switching logic with battery/rate/exclusion zone safety constraints, STK `.a` attitude file export format.',
+      images: ['/UTAT Picture.png', '/UTAT Picture 2.png'],
+      captions: ['Orbital trajectory visualization', 'FINCH Cubesat Assmembly']
     },
     {
       id: 3,
-      title: 'Prosthetic Leg Redesign',
-      description: 'Incorporated variable stiffness actuators into a prosthetic leg design to add adjustable tension capabilities while significantly reducing overall weight and cost compared to market alternatives. Researched human gait biomechanics and prosthetic technologies to inform design choices. Utilized Onshape for 3D modeling and simulation, followed by prototype fabrication and testing to validate performance improvements in comfort and functionality for users. Final basic prototype achieved an adjustable load stiffness between 0.7 - 4.4 (500% variability) pounds of force when simulating walking conditions.',
-      images: [
-        '/Prosthetic Leg Proj Pic 1.png',
-        '/Prosthetic Leg Proj Results 2.png',
-        '/Prosthetic Leg Proj Results 3.png'
-      ],
-      captions: ['Prototype', 'Spring Angles Tested', 'Results (Constant Displacement)']
-    },
-    {
-      id: 4,
-      title: 'F1Tenth Competition',
-      description: 'Using Autodrive, ROS2, and Reinforcement Learning to develop an autonomous racing vehicle for the F1Tenth competition. Implementing path planning, computer vision, and control algorithms to navigate a 1/10th scale racecar powered by an Nvidia Jetson NX. RL algorithm training in F1Tenth gym enviromnment. Planning to compete at the IEEE Vehicular Technology Conference in Boston, September 2026',
-      images: ['/F1Tenth2.png','/F1Tenth.png'],
-      captions: ['Racecar','AutoDrive Simulator View']
-    },
-    {
-      id: 5,
       title: 'Robotic Arm',
       description: 'Designed a multi-axis robotic camera arm that meets key engineering targets for reach, payload, speed, and precision, while remaining lightweight, modular, and cost-effective for independent cinematographers. The system achieves a working reach of roughly 0.75m, supports a ~1 kg camera payload, and maintains motion accuracy within ±0.5 mm, outperforming the original tolerance goals. To satisfy usability constraints, the total assembly was kept under roughly forty-five kilograms, and a total material cost ~$5,500 (<$8,000 target). I focused on designing the end effector in SolidWorks and specifying materials and components for the entire design to meet performance targets. Created a compact two-axis pan-tilt mechanism, selected lightweight aluminum and carbon-fiber elements to reduce inertia, and determined stepper motors and gearing capable of delivering appropriate torque for rapid, precise orientation of the camera.',
       images: [
@@ -96,6 +78,24 @@ const Projects = () => {
         '/243 Robot Project Project Management.png'
       ],
       captions: ['Finished Robotic arm assembly', 'Exploded View + Bill of Materials', 'Project Management Tools']
+    },
+    {
+      id: 4,
+      title: 'F1Tenth Competition',
+      description: 'Using Autodrive, ROS2, and Reinforcement Learning to develop an autonomous racing vehicle for the F1Tenth competition. Implementing path planning, computer vision, and control algorithms to navigate a 1/10th scale racecar powered by an Nvidia Jetson NX. Using AutoDrive for 3D simulation, SAC reinforcement learning algorithm (PyTorch) in ROS2 RViz & gym, and Docker for competition-mandated containerization. Planning to compete at the IEEE Vehicular Technology Conference in Boston, September 2026',
+      images: ['/F1Tenth2.png','/F1Tenth.png'],
+      captions: ['Racecar','AutoDrive Simulator View']
+    },
+    {
+      id: 5,
+      title: 'Prosthetic Leg Redesign',
+      description: 'Incorporated variable stiffness actuators into a prosthetic leg design to add adjustable tension capabilities while significantly reducing overall weight and cost compared to market alternatives. Researched human gait biomechanics and prosthetic technologies to inform design choices. Utilized Onshape for 3D modeling and simulation, followed by prototype fabrication and testing to validate performance improvements in comfort and functionality for users. Final basic prototype achieved an adjustable load stiffness between 0.7 - 4.4 (500% variability) pounds of force when simulating walking conditions.',
+      images: [
+        '/Prosthetic Leg Proj Pic 1.png',
+        '/Prosthetic Leg Proj Results 2.png',
+        '/Prosthetic Leg Proj Results 3.png'
+      ],
+      captions: ['Prototype', 'Spring Angles Tested', 'Results (Constant Displacement)']
     },
     {
       id: 6,
@@ -209,7 +209,7 @@ const Projects = () => {
                   </div>
                   
                   {/* 3D Viewer for Robotic Arm Project */}
-                  {project.id === 5 && Canvas && components && (
+                  {project.id === 3 && Canvas && components && (
                     <>
                       <h4 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mt-8 mb-4">Final 3D Model:</h4>
                       <div className="w-full h-[500px] bg-gradient-to-br from-gray-100 to-gray-200 dark:from-slate-900 dark:to-slate-800 rounded-xl shadow-2xl dark:shadow-white/30 overflow-hidden">

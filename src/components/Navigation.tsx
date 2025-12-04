@@ -30,6 +30,7 @@ const Navigation = ({ darkMode, toggleDarkMode }: NavigationProps) => {
   }, [])
 
   const scrollToSection = (sectionId: string) => {
+    setActiveSection(sectionId)
     const element = document.getElementById(sectionId)
     if (element) {
       const offset = 80 // Adjust scroll position so header appears near top
