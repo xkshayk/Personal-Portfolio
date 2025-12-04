@@ -10,7 +10,7 @@ const Navigation = ({ darkMode, toggleDarkMode }: NavigationProps) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'projects', 'contact']
+      const sections = ['home', 'about', 'projects', /* 'photos', */ 'connect']
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
@@ -86,7 +86,8 @@ const Navigation = ({ darkMode, toggleDarkMode }: NavigationProps) => {
   const navItems = [
     { id: 'about', label: 'About' },
     { id: 'projects', label: 'Projects' },
-    { id: 'contact', label: 'Contact' },
+    // { id: 'photos', label: 'Photos' },
+    { id: 'connect', label: 'Connect' },
   ]
 
   return (

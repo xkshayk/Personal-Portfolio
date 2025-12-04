@@ -6,7 +6,7 @@ const Home = () => {
           Akshay Kolwalkar
         </h1>
         <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 font-light">
-          Engineering @ the University of Toronto
+          
         </p>
       </div>
     </section>

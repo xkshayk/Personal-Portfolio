@@ -5,21 +5,21 @@ const About = () => {
         <h2 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-16">About Me</h2>
         
         <div className="grid md:grid-cols-2 gap-4 mb-16">
-          {/* Profile Image */}
-          <div className="flex items-start justify-start">
-            <img src="/Akshay Aquarium.png" alt="Profile" className="w-[420px] h-[420px] rounded-lg object-cover" />
+          {/* Bio */}
+          <div className="flex flex-col justify-start items-start">
+            <p className="text-xl md:text-2xl text-gray-900 dark:text-gray-100 leading-relaxed font-light text-left">
+              I'm a Mechanical Engineer student at the University of Toronto with a passion for aerodynamics and competiton. In the future I hope I can combine these interests in a career I love. I've outlined some of the projects I've been lucky enough to be a part of so far, and any feedback or just discussion would be awesome. 
+            </p>
           </div>
           
-          {/* Bio */}
-          <div className="flex flex-col justify-center items-center">
-            <p className="text-5xl md:text-6xl text-gray-900 dark:text-gray-100 leading-relaxed font-light text-center">
-              I love racing, beaches, and biryani
-            </p>
+          {/* Profile Image */}
+          <div className="flex items-start justify-center">
+            <img src="/Akshay Aquarium.png" alt="Profile" className="w-[420px] h-[420px] rounded-lg object-cover" />
           </div>
         </div>
 
         {/* Timeline */}
-        <div className="mt-32">
+        <div className="mt-16">
           <div className="relative">
             {/* Timeline line */}
             <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-teal-500 dark:from-cyan-600 dark:via-blue-600 dark:to-teal-600"></div>

@@ -1,6 +1,6 @@
 const Contact = () => {
   return (
-    <section id="contact" className="min-h-screen py-20 px-6 flex items-center">
+    <section id="connect" className="min-h-screen py-20 px-6 flex items-center">
       <div className="max-w-4xl mx-auto text-center w-full">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-8">Connect</h2>
         
