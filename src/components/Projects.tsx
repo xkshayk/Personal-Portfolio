@@ -82,9 +82,9 @@ const Projects = () => {
     {
       id: 4,
       title: 'F1Tenth Competition',
-      description: 'Using Autodrive, ROS2, and Reinforcement Learning to develop an autonomous racing vehicle for the F1Tenth competition.',
-      images: ['/F1Tenth.png'],
-      captions: ['Vehicle on track']
+      description: 'Using Autodrive, ROS2, and Reinforcement Learning to develop an autonomous racing vehicle for the F1Tenth competition. Implementing path planning, computer vision, and control algorithms to navigate a 1/10th scale racecar powered by an Nvidia Jetson NX. RL algorithm training in F1Tenth gym enviromnment. Planning to compete at the IEEE Vehicular Technology Conference in Boston, September 2026',
+      images: ['/F1Tenth2.png','/F1Tenth.png'],
+      captions: ['Racecar','AutoDrive Simulator View']
     },
     {
       id: 5,

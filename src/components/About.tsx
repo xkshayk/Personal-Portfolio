@@ -2,7 +2,14 @@ const About = () => {
   return (
     <section id="about" className="min-h-screen py-20 px-6">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-16">About Me</h2>
+        <div className="relative">
+          <h2 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-16">About Me</h2>
+          
+          {/* Profile Image - positioned absolutely to align with header */}
+          <div className="hidden md:block absolute top-0 right-0">
+            <img src="/Akshay Aquarium.png" alt="Profile" className="w-[500px] h-[500px] rounded-lg object-cover" />
+          </div>
+        </div>
         
         <div className="grid md:grid-cols-2 gap-4 mb-16">
           {/* Bio */}
@@ -12,10 +19,22 @@ const About = () => {
             </p>
           </div>
           
-          {/* Profile Image */}
-          <div className="flex items-start justify-center">
+          {/* Mobile Image placeholder */}
+          <div className="md:hidden flex items-start justify-center">
             <img src="/Akshay Aquarium.png" alt="Profile" className="w-[420px] h-[420px] rounded-lg object-cover" />
           </div>
+        </div>
+
+        {/* Resume Button */}
+        <div className="flex justify-start mb-12">
+          <a
+            href="/Akshay_Kolwalkar_Resume_Tech.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white text-lg font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+          >
+            Resume
+          </a>
         </div>
 
         {/* Timeline */}
