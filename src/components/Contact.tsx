@@ -1,8 +1,12 @@
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
+
 const Contact = () => {
+  const { elementRef: titleRef, isVisible: titleVisible } = useIntersectionObserver()
+
   return (
     <section id="connect" className="min-h-screen py-32 px-6 flex items-center">
       <div className="max-w-4xl mx-auto text-center w-full">
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-8 animate-fade-in-up">Connect</h2>
+        <h2 ref={titleRef as React.RefObject<HTMLHeadingElement>} className={`text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-8 ${titleVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Connect</h2>
         
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <a

@@ -1,5 +1,6 @@
 import { useState, Suspense, useEffect } from 'react'
 import RobotArmModel from './RobotArmModel.tsx'
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
 
 interface Project {
   id: number
@@ -13,6 +14,7 @@ const Projects = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: number]: number }>({})
   const [Canvas, setCanvas] = useState<any>(null)
   const [components, setComponents] = useState<any>(null)
+  const { elementRef: titleRef, isVisible: titleVisible } = useIntersectionObserver()
 
   useEffect(() => {
     // Dynamically load Three.js components
@@ -110,7 +112,7 @@ const Projects = () => {
     <>
       <section id="projects" className="min-h-screen py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-16 animate-fade-in-up">Projects</h2>
+          <h2 ref={titleRef as React.RefObject<HTMLHeadingElement>} className={`text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-16 ${titleVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Projects</h2>
           
           <div className="grid grid-cols-1 gap-6">
             {projects.map((project) => {

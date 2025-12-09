@@ -1,9 +1,13 @@
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
+
 const About = () => {
+  const { elementRef: titleRef, isVisible: titleVisible } = useIntersectionObserver()
+
   return (
     <section id="about" className="min-h-screen py-32 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="relative">
-          <h2 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-16 animate-fade-in-up">About Me</h2>
+          <h2 ref={titleRef as React.RefObject<HTMLHeadingElement>} className={`text-5xl md:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-16 ${titleVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>About Me</h2>
           
           {/* Profile Image - positioned absolutely to align with header */}
           <div className="hidden md:block absolute top-0 right-0">
