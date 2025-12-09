@@ -64,7 +64,7 @@ const Projects = () => {
     {
       id: 2,
       title: 'UTAT Satellite Path Simulation',
-      description: 'This project is an attitude planning and guidance package for the UTAT ADCS team supporting the FINCH satellite mission. It generates satellite attitude profiles using NASA SPICE ephemeris for dual-mode operations: sun-pointing (power generation via solar arrays) and target tracking (hyperspectral crop imaging). FINCH (Field Imaging Nanosatellite for Crop residue Hyperspectral mapping) is a 3U CubeSat demonstrating Volume Phase Holographic (VPH) grism technology for SWIR hyperspectral remote sensing of agricultural crop residue. \nLaunch target: Q3 2028. Using NASA SPICE toolkit via SpiceyPy Python wrapper in DE440 for planetary ephemeris kernels, ICRF/J2000 Earth-centered inertial reference frame, Hamiltonian scalar-first quaternions [w,x,y,z] for Tensortech ADCS 10m compatibility, pickle-based hourly ephemeris caching, mode switching logic with battery/rate/exclusion zone safety constraints, STK `.a` attitude file export format.',
+      description: 'This project is an attitude planning and guidance package for the UTAT ADCS team supporting the FINCH satellite mission. It generates satellite attitude profiles using NASA SPICE ephemeris for dual-mode operations: sun-pointing (power generation via solar arrays) and target tracking (hyperspectral crop imaging). FINCH (Field Imaging Nanosatellite for Crop residue Hyperspectral mapping) is a 3U CubeSat demonstrating Volume Phase Holographic (VPH) grism technology for SWIR hyperspectral remote sensing of agricultural crop residue. \nLaunch target: Q3 2028. Using NASA SPICE toolkit via SpiceyPy Python wrapper in DE440 for planetary ephemeris kernels, ICRF/J2000 Earth-centered inertial reference frame, Hamiltonian scalar-first quaternions [w,x,y,z] for Tensortech ADCS 10m compatibility, pickle-based hourly ephemeris caching, and implementing target tracking/solar power generation mode switching logic with battery/rate/exclusion zone safety constraints, outputting STK attitude files (.a format).',
       images: ['/UTAT Picture.png', '/UTAT Picture 2.png'],
       captions: ['Orbital trajectory visualization', 'FINCH Cubesat Assmembly']
     },
@@ -110,14 +110,14 @@ const Projects = () => {
     <>
       <section id="projects" className="min-h-screen py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-16">Projects</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-16 animate-fade-in-up">Projects</h2>
           
           <div className="grid grid-cols-1 gap-6">
             {projects.map((project) => {
               const currentIndex = currentImageIndex[project.id] || 0
               return (
-                <div key={project.id}>
-                  <div className="rounded-2xl shadow-lg hover:shadow-2xl dark:shadow-white/20 dark:hover:shadow-white/30 transition-all duration-300 overflow-hidden border-4 border-gray-800 dark:border-gray-300">
+                <div key={project.id} className="group">
+                  <div className="rounded-2xl shadow-lg hover:shadow-2xl dark:shadow-white/20 dark:hover:shadow-white/30 transition-all duration-300 overflow-hidden border-4 border-gray-800 dark:border-gray-300 hover:scale-[1.01]">
                     <div className="bg-gradient-to-br from-cyan-200/30 via-blue-200/30 to-teal-200/30 dark:from-slate-950/30 dark:via-blue-900/30 dark:to-cyan-900/30 backdrop-blur-lg rounded-xl overflow-hidden">
                       <div className="flex flex-col md:flex-row">
                         {/* Left side - Text content */}

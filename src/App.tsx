@@ -3,7 +3,7 @@ import Navigation from './components/Navigation'
 import Home from './components/Home'
 import About from './components/About'
 import Projects from './components/Projects'
-// import Photos from './components/Photos'
+import Photos from './components/Photos'
 import Contact from './components/Contact'
 
 function App() {
@@ -42,7 +42,7 @@ function App() {
         <Home />
         <About />
         <Projects />
-        {/* <Photos /> */}
+        <Photos />
         <Contact />
       </main>
     </div>
