@@ -1,4 +1,6 @@
-import { useState, Suspense, useEffect } from 'react'
+import { useState, Suspense } from 'react'
+import { Canvas } from '@react-three/fiber'
+import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import RobotArmModel from './RobotArmModel.tsx'
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
 
@@ -12,24 +14,7 @@ interface Project {
 
 const Projects = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: number]: number }>({})
-  const [Canvas, setCanvas] = useState<any>(null)
-  const [components, setComponents] = useState<any>(null)
   const { elementRef: titleRef, isVisible: titleVisible } = useIntersectionObserver()
-
-  useEffect(() => {
-    // Dynamically load Three.js components
-    import('@react-three/fiber').then(module => {
-      setCanvas(() => module.Canvas)
-    }).catch(err => {
-      console.error('Failed to load Canvas:', err)
-    })
-
-    import('@react-three/drei').then(module => {
-      setComponents(module)
-    }).catch(err => {
-      console.error('Failed to load drei:', err)
-    })
-  }, [])
 
   const nextImage = (projectId: number, totalImages: number, e: React.MouseEvent) => {
     e.stopPropagation()
@@ -211,13 +196,13 @@ const Projects = () => {
                   </div>
                   
                   {/* 3D Viewer for Robotic Arm Project */}
-                  {project.id === 3 && Canvas && components && (
+                  {project.id === 3 && (
                     <>
                       <h4 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mt-8 mb-4">Final 3D Model:</h4>
                       <div className="w-full h-[500px] bg-gradient-to-br from-gray-100 to-gray-200 dark:from-slate-900 dark:to-slate-800 rounded-xl shadow-2xl dark:shadow-white/30 overflow-hidden">
                       <Canvas>
                         <Suspense fallback={null}>
-                          <components.PerspectiveCamera makeDefault position={[3, 3, 3]} />
+                          <PerspectiveCamera makeDefault position={[3, 3, 3]} />
                           <ambientLight intensity={0.5} />
                           <directionalLight position={[10, 10, 5]} intensity={1} />
                           
@@ -230,7 +215,7 @@ const Projects = () => {
                           {/* Robot Arm Model */}
                           <RobotArmModel />
                           
-                          <components.OrbitControls />
+                          <OrbitControls />
                         </Suspense>
                       </Canvas>
                     </div>
