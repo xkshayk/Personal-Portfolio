@@ -26,14 +26,15 @@ const Photos = () => {
   }
 
   const mediaItems: MediaItem[] = [
-    { id: 1, src: '/Space Center Houston.png', caption: getCaption('Space Center Houston.png'), type: 'image' },
-    { id: 2, src: '/Houston HOSA ILC 2024.png', caption: getCaption('Houston HOSA ILC 2024.png'), type: 'image' },
-    { id: 3, src: '/VEX Team Pic.png', caption: getCaption('VEX Team Pic.png'), type: 'image' },
-    { id: 4, src: '/VEX Team Demonstration.MP4', caption: getCaption('VEX Team Demonstration.MP4'), type: 'video' },
-    { id: 5, src: '/Norton Healthcare CNA Training.PNG', caption: getCaption('Norton Healthcare CNA Training.PNG'), type: 'image' },
-    { id: 6, src: '/Test Vitals.PNG', caption: getCaption('Test Vitals.PNG'), type: 'image' },
-    { id: 7, src: '/Sr-71 Blackbird (with mom cameo).png', caption: getCaption('Sr-71 Blackbird (with mom cameo).png'), type: 'image' },
-    { id: 8, src: '/F-117 Nighthawk.png', caption: getCaption('F-117 Nighthawk.png'), type: 'image' },
+    { id: 1, src: '/APS111 Team Project.jpg', caption: getCaption('APS111 Team Project.jpg'), type: 'image' },
+    { id: 2, src: '/Space Center Houston.png', caption: getCaption('Space Center Houston.png'), type: 'image' },
+    { id: 3, src: '/Houston HOSA ILC 2024.png', caption: getCaption('Houston HOSA ILC 2024.png'), type: 'image' },
+    { id: 4, src: '/VEX Team Pic.png', caption: getCaption('VEX Team Pic.png'), type: 'image' },
+    { id: 5, src: '/VEX Team Demonstration.MP4', caption: getCaption('VEX Team Demonstration.MP4'), type: 'video' },
+    { id: 6, src: '/Norton Healthcare CNA Training.PNG', caption: getCaption('Norton Healthcare CNA Training.PNG'), type: 'image' },
+    { id: 7, src: '/Test Vitals.PNG', caption: getCaption('Test Vitals.PNG'), type: 'image' },
+    { id: 8, src: '/Sr-71 Blackbird (with mom cameo).png', caption: getCaption('Sr-71 Blackbird (with mom cameo).png'), type: 'image' },
+    { id: 9, src: '/F-117 Nighthawk.png', caption: getCaption('F-117 Nighthawk.png'), type: 'image' },
   ]
 
   const nextSlide = () => {
@@ -99,7 +100,7 @@ const Photos = () => {
     <section id="photos" className="min-h-screen py-32 px-6">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-16 animate-fade-in-up">
-          Photos & Memories
+          Photos
         </h2>
 
         {/* Main Carousel */}
