@@ -1,149 +1,122 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
-interface NavigationProps {
-  darkMode: boolean
-  toggleDarkMode: () => void
-}
+const navigationItems = [
+  { id: 'work', label: 'Work' },
+  { id: 'trajectory', label: 'Trajectory' },
+  { id: 'notes', label: 'Field notes' },
+  { id: 'contact', label: 'Contact' },
+]
 
-const Navigation = ({ darkMode, toggleDarkMode }: NavigationProps) => {
+const Navigation = () => {
   const [activeSection, setActiveSection] = useState('home')
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [scrollProgress, setScrollProgress] = useState(0)
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'about', 'projects', 'photos', 'connect']
-      const scrollPosition = window.scrollY + 100
+    const observedSections = ['home', ...navigationItems.map((item) => item.id)]
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => Boolean(section))
 
-      for (const section of sections) {
-        const element = document.getElementById(section)
-        if (element) {
-          const { offsetTop, offsetHeight } = element
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section)
-            break
-          }
-        }
-      }
-    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+        if (visible?.target.id) setActiveSection(visible.target.id)
+      },
+      { rootMargin: '-25% 0px -60% 0px', threshold: [0, 0.2, 0.5] },
+    )
+
+    observedSections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
   }, [])
 
-  const scrollToSection = (sectionId: string) => {
-    setActiveSection(sectionId)
-    const element = document.getElementById(sectionId)
-    if (element) {
-      const offset = 80 // Adjust scroll position so header appears near top
-      const elementPosition = element.getBoundingClientRect().top
-      const targetPosition = elementPosition + window.pageYOffset - offset
-      const start = window.pageYOffset
-      const startTime = performance.now()
-      const duration = 1000 // 1 second
+  useEffect(() => {
+    let frame = 0
 
-      const easeInOutCubic = (t: number) => {
-        return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1
-      }
-
-      const scroll = (currentTime: number) => {
-        const elapsed = currentTime - startTime
-        const progress = Math.min(elapsed / duration, 1)
-        const ease = easeInOutCubic(progress)
-        
-        window.scrollTo(0, start + (targetPosition - start) * ease)
-        
-        if (progress < 1) {
-          requestAnimationFrame(scroll)
-        }
-      }
-
-      requestAnimationFrame(scroll)
-    }
-  }
-
-  const scrollToTop = () => {
-    const start = window.pageYOffset
-    const startTime = performance.now()
-    const duration = 1000 // 1 second
-
-    const easeInOutCubic = (t: number) => {
-      return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1
+    const updateProgress = () => {
+      frame = 0
+      const available = document.documentElement.scrollHeight - window.innerHeight
+      setScrollProgress(available > 0 ? Math.min(window.scrollY / available, 1) : 0)
     }
 
-    const scroll = (currentTime: number) => {
-      const elapsed = currentTime - startTime
-      const progress = Math.min(elapsed / duration, 1)
-      const ease = easeInOutCubic(progress)
-      
-      window.scrollTo(0, start * (1 - ease))
-      
-      if (progress < 1) {
-        requestAnimationFrame(scroll)
-      }
+    const handleScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateProgress)
     }
 
-    requestAnimationFrame(scroll)
-  }
+    updateProgress()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll)
 
-  const navItems = [
-    { id: 'about', label: 'About' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'photos', label: 'Photos' },
-    { id: 'connect', label: 'Connect' },
-  ]
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+      if (frame) window.cancelAnimationFrame(frame)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!menuOpen) return
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMenuOpen(false)
+    }
+
+    window.addEventListener('keydown', closeOnEscape)
+    return () => window.removeEventListener('keydown', closeOnEscape)
+  }, [menuOpen])
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md overflow-x-auto">
-      <div className="max-w-7xl mx-auto px-4 py-4">
-        <div className="flex items-center justify-between gap-4 min-w-max">
-          <button
-            onClick={scrollToTop}
-            className="hover:opacity-80 transition-opacity flex-shrink-0"
-            aria-label="Scroll to top"
-          >
-            <img src="/fighter-jet-logo.png" alt="Logo" className="h-10 w-auto" />
-          </button>
-          
-          <div className="flex items-center gap-4 md:gap-8">
-            <ul className="flex gap-4 md:gap-8">
-              {navItems.map((item) => (
-                <li key={item.id}>
-                  <button
-                    onClick={() => scrollToSection(item.id)}
-                    className={`text-lg md:text-xl font-bold transition-colors px-2 md:px-3 py-2 rounded-lg whitespace-nowrap ${
-                      activeSection === item.id
-                        ? 'text-primary-600 dark:text-primary-400'
-                        : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100'
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-            
-            {/* Dark mode toggle */}
-            <button
-              onClick={toggleDarkMode}
-              className="p-3 rounded-lg bg-gradient-to-br from-cyan-200/60 via-blue-200/60 to-teal-200/60 dark:from-slate-950/60 dark:via-blue-900/60 dark:to-cyan-900/60 backdrop-blur-sm hover:from-cyan-200/80 hover:via-blue-200/80 hover:to-teal-200/80 dark:hover:from-slate-950/80 dark:hover:via-blue-900/80 dark:hover:to-cyan-900/80 transition-all flex-shrink-0"
-              aria-label="Toggle dark mode"
-              title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-            >
-              {darkMode ? (
-                // Sun icon
-                <svg className="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              ) : (
-                // Moon icon
-                <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-              )}
-            </button>
-          </div>
-        </div>
+    <header className="site-header">
+      <div className="site-header__bar">
+        <a className="wordmark" href="#home" onClick={() => setMenuOpen(false)} aria-label="Akshay Kolwalkar, back to top">
+          <img src="/fighter-jet-logo.svg" alt="" aria-hidden="true" />
+          <span>
+            Akshay <strong>/ 01</strong>
+          </span>
+        </a>
+
+        <button
+          className="index-toggle"
+          type="button"
+          aria-expanded={menuOpen}
+          aria-controls="primary-navigation"
+          onClick={() => setMenuOpen((isOpen) => !isOpen)}
+        >
+          <span>{menuOpen ? 'Close' : 'Index'}</span>
+          <span className="index-toggle__mark" aria-hidden="true">{menuOpen ? '×' : '+'}</span>
+        </button>
+
+        <nav
+          id="primary-navigation"
+          className={`primary-navigation ${menuOpen ? 'primary-navigation--open' : ''}`}
+          aria-label="Primary navigation"
+        >
+          <ol>
+            {navigationItems.map((item, index) => (
+              <li key={item.id}>
+                <a
+                  href={`#${item.id}`}
+                  aria-current={activeSection === item.id ? 'location' : undefined}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <span className="primary-navigation__number">0{index + 1}</span>
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ol>
+          <a className="primary-navigation__resume" href="/Akshay Kolwalkar Resume Final.pdf" target="_blank" rel="noreferrer">
+            Résumé <span aria-hidden="true">↗</span>
+          </a>
+        </nav>
       </div>
-    </nav>
+
+      <div className="scroll-rule" aria-hidden="true">
+        <span style={{ transform: `scaleX(${scrollProgress})` }} />
+      </div>
+    </header>
   )
 }
 

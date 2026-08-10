@@ -1,47 +1,43 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import Navigation from './components/Navigation'
 import Home from './components/Home'
-import About from './components/About'
 import Projects from './components/Projects'
+import About from './components/About'
 import Photos from './components/Photos'
 import Contact from './components/Contact'
 
-function App() {
-  const [darkMode, setDarkMode] = useState(true)
-
+const App = () => {
   useEffect(() => {
-    // Check localStorage for saved preference
-    const savedMode = localStorage.getItem('darkMode')
-    if (savedMode) {
-      setDarkMode(savedMode === 'true')
-    } else {
-      // Check system preference
-      setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches)
+    const revealItems = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'))
+
+    if (!('IntersectionObserver' in window)) {
+      revealItems.forEach((item) => item.classList.add('is-visible'))
+      return
     }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return
+          entry.target.classList.add('is-visible')
+          observer.unobserve(entry.target)
+        })
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -5% 0px' },
+    )
+
+    revealItems.forEach((item) => observer.observe(item))
+    return () => observer.disconnect()
   }, [])
 
-  useEffect(() => {
-    // Update document class and localStorage
-    if (darkMode) {
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('darkMode', 'true')
-    } else {
-      document.documentElement.classList.remove('dark')
-      localStorage.setItem('darkMode', 'false')
-    }
-  }, [darkMode])
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode)
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-200 via-blue-200 via-30% to-teal-200 to-70% dark:from-slate-950 dark:via-blue-900 dark:via-40% dark:to-cyan-900 dark:to-80% text-gray-900 dark:text-gray-100 transition-colors duration-300">
-      <Navigation darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      <main>
+    <div className="site-frame">
+      <a className="skip-link" href="#main-content">Skip to content</a>
+      <Navigation />
+      <main id="main-content">
         <Home />
-        <About />
         <Projects />
+        <About />
         <Photos />
         <Contact />
       </main>
