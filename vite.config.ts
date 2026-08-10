@@ -49,6 +49,7 @@ const copyDeployedAssets = (): Plugin => ({
   closeBundle() {
     const outputDirectory = resolve(projectRoot, 'dist')
     const clientDirectory = resolve(outputDirectory, 'client')
+    const hostingDirectory = resolve(outputDirectory, '.openai')
 
     deployedAssets.forEach((asset) => {
       const source = resolve(projectRoot, 'public', asset)
@@ -74,6 +75,12 @@ const copyDeployedAssets = (): Plugin => ({
   },
 }\n`,
       'utf8',
+    )
+
+    mkdirSync(hostingDirectory, { recursive: true })
+    copyFileSync(
+      resolve(projectRoot, '.openai', 'hosting.json'),
+      resolve(hostingDirectory, 'hosting.json'),
     )
   },
 })
