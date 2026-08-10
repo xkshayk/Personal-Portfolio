@@ -1,4 +1,4 @@
-import { copyFileSync, mkdirSync, writeFileSync } from 'node:fs'
+import { copyFileSync, mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
@@ -43,12 +43,16 @@ const deployedAssets = [
 const copyDeployedAssets = (): Plugin => ({
   name: 'copy-deployed-portfolio-assets',
   apply: 'build',
+  buildStart() {
+    rmSync(resolve(projectRoot, 'dist'), { recursive: true, force: true })
+  },
   closeBundle() {
     const outputDirectory = resolve(projectRoot, 'dist')
+    const clientDirectory = resolve(outputDirectory, 'client')
 
     deployedAssets.forEach((asset) => {
       const source = resolve(projectRoot, 'public', asset)
-      const destination = resolve(outputDirectory, asset)
+      const destination = resolve(clientDirectory, asset)
       mkdirSync(dirname(destination), { recursive: true })
       copyFileSync(source, destination)
     })
@@ -77,5 +81,8 @@ const copyDeployedAssets = (): Plugin => ({
 export default defineConfig(({ command }) => ({
   plugins: [react(), copyDeployedAssets()],
   base: '/',
+  build: {
+    outDir: 'dist/client',
+  },
   publicDir: command === 'build' ? false : 'public',
 }))
