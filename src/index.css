@@ -3,147 +3,106 @@
 @tailwind utilities;
 
 :root {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Light: warm paper, near-black ink, one orange accent */
+  --paper: 247 246 242;
+  --surface: 255 255 255;
+  --ink: 26 26 24;
+  --muted: 95 94 88;
+  --rule: 221 219 211;
+  --accent: 184 67 15;
+  --signal: 232 89 12;
+  color-scheme: light;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* Hide scrollbar but keep functionality */
-::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
-body, html {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  overflow-y: auto;
+.dark {
+  --paper: 18 18 17;
+  --surface: 27 27 25;
+  --ink: 236 235 230;
+  --muted: 156 154 146;
+  --rule: 48 47 44;
+  --accent: 240 138 75;
+  --signal: 245 128 62;
+  color-scheme: dark;
 }
 
 html {
   scroll-behavior: smooth;
-  zoom: 0.9;
+  scroll-padding-top: 4.5rem;
 }
 
-/* Smooth transitions for dark mode */
-* {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-/* Light animations */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+body {
+  @apply bg-paper text-ink font-sans antialiased;
+  min-width: 320px;
+  font-size: 17px;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
 }
 
-@keyframes fade-in-down {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+::selection {
+  background: rgb(var(--signal) / 0.25);
 }
 
-@keyframes slide-in-left {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
+@layer components {
+  .link {
+    @apply underline decoration-rule decoration-1 underline-offset-[3px] hover:decoration-accent hover:text-accent transition-colors;
   }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
 
-@keyframes slide-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
+  .kicker {
+    @apply font-mono text-[12px] uppercase tracking-[0.08em] text-muted;
   }
-  to {
-    opacity: 1;
-    transform: translateX(0);
+
+  .tag {
+    @apply font-mono text-[12px] text-muted border border-rule rounded-[3px] px-1.5 py-0.5 whitespace-nowrap;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-2 border border-ink/80 rounded-[3px] px-3.5 py-2 text-[15px] font-medium hover:bg-ink hover:text-paper transition-colors;
+  }
+
+  .btn-quiet {
+    @apply inline-flex items-center gap-2 border border-rule rounded-[3px] px-3 py-1.5 text-[14px] text-muted hover:text-ink hover:border-ink/60 transition-colors;
   }
 }
 
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+/* Range input used by the mission replay scrubber */
+input[type='range'].scrubber {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 20px;
+  background: transparent;
+  cursor: pointer;
 }
-
-.animate-fade-in {
-  animation: fade-in 0.5s ease-out forwards;
+input[type='range'].scrubber::-webkit-slider-runnable-track {
+  height: 2px;
+  background: rgb(var(--rule));
 }
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.6s ease-out forwards;
+input[type='range'].scrubber::-moz-range-track {
+  height: 2px;
+  background: rgb(var(--rule));
 }
-
-.animate-fade-in-down {
-  animation: fade-in-down 0.6s ease-out forwards;
+input[type='range'].scrubber::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: rgb(var(--signal));
+  border: 2px solid rgb(var(--paper));
 }
-
-.animate-slide-in-left {
-  animation: slide-in-left 0.5s ease-out forwards;
+input[type='range'].scrubber::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgb(var(--signal));
+  border: 2px solid rgb(var(--paper));
 }
-
-.animate-slide-in-right {
-  animation: slide-in-right 0.5s ease-out forwards;
+input[type='range'].scrubber:focus-visible {
+  outline: 2px solid rgb(var(--signal));
+  outline-offset: 2px;
 }
-
-.animate-scale-in {
-  animation: scale-in 0.4s ease-out forwards;
-}
-
-/* Staggered animation delays */
-.animate-delay-100 { animation-delay: 0.1s; }
-.animate-delay-200 { animation-delay: 0.2s; }
-.animate-delay-300 { animation-delay: 0.3s; }
-.animate-delay-400 { animation-delay: 0.4s; }
-.animate-delay-500 { animation-delay: 0.5s; }

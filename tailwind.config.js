@@ -8,21 +8,22 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Inter', 'sans-serif'],
+                sans: ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
+                serif: ['"Source Serif 4"', 'Georgia', 'serif'],
+                mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
             },
+            // Colours are CSS variables (see index.css) so light/dark is one swap, not a dark: class per element
             colors: {
-                primary: {
-                    50: '#f0f9ff',
-                    100: '#e0f2fe',
-                    200: '#bae6fd',
-                    300: '#7dd3fc',
-                    400: '#38bdf8',
-                    500: '#0ea5e9',
-                    600: '#0284c7',
-                    700: '#0369a1',
-                    800: '#075985',
-                    900: '#0c4a6e',
-                },
+                paper: 'rgb(var(--paper) / <alpha-value>)',
+                surface: 'rgb(var(--surface) / <alpha-value>)',
+                ink: 'rgb(var(--ink) / <alpha-value>)',
+                muted: 'rgb(var(--muted) / <alpha-value>)',
+                rule: 'rgb(var(--rule) / <alpha-value>)',
+                accent: 'rgb(var(--accent) / <alpha-value>)',
+                signal: 'rgb(var(--signal) / <alpha-value>)',
+            },
+            maxWidth: {
+                page: '72rem',
             },
         },
     },

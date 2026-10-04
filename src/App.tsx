@@ -1,51 +1,47 @@
-import { useState, useEffect } from 'react'
-import Navigation from './components/Navigation'
-import Home from './components/Home'
+import { useEffect, useState } from 'react'
+import Nav from './components/Nav'
+import Hero from './components/Hero'
+import Experience from './components/Experience'
+import CaseStudies from './components/CaseStudies'
+import Skills from './components/Skills'
 import About from './components/About'
-import Projects from './components/Projects'
-import Photos from './components/Photos'
-import Contact from './components/Contact'
+import Footer from './components/Footer'
+import { LightboxProvider } from './components/Lightbox'
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true)
+  // index.html already applied the saved/system theme before paint; start from that
+  const [darkMode, setDarkMode] = useState(() => document.documentElement.classList.contains('dark'))
 
   useEffect(() => {
-    // Check localStorage for saved preference
-    const savedMode = localStorage.getItem('darkMode')
-    if (savedMode) {
-      setDarkMode(savedMode === 'true')
-    } else {
-      // Check system preference
-      setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches)
-    }
-  }, [])
-
-  useEffect(() => {
-    // Update document class and localStorage
-    if (darkMode) {
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('darkMode', 'true')
-    } else {
-      document.documentElement.classList.remove('dark')
-      localStorage.setItem('darkMode', 'false')
-    }
+    document.documentElement.classList.toggle('dark', darkMode)
   }, [darkMode])
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode)
+    setDarkMode((d) => {
+      try {
+        localStorage.setItem('darkMode', String(!d))
+      } catch {
+        // storage blocked (private mode): theme just won't persist
+      }
+      return !d
+    })
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-200 via-blue-200 via-30% to-teal-200 to-70% dark:from-slate-950 dark:via-blue-900 dark:via-40% dark:to-cyan-900 dark:to-80% text-gray-900 dark:text-gray-100 transition-colors duration-300">
-      <Navigation darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+    <LightboxProvider>
+      <a href="#experience" className="sr-only focus:not-sr-only focus:absolute focus:z-[70] focus:m-2 focus:px-3 focus:py-2 focus:bg-ink focus:text-paper">
+        Skip to content
+      </a>
+      <Nav darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       <main>
-        <Home />
+        <Hero />
+        <Experience />
+        <CaseStudies />
+        <Skills />
         <About />
-        <Projects />
-        <Photos />
-        <Contact />
       </main>
-    </div>
+      <Footer />
+    </LightboxProvider>
   )
 }
 

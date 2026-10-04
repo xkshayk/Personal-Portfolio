@@ -1,34 +1,26 @@
-import { useRef, useEffect } from 'react'
-import { Group, Box3, Vector3 } from 'three'
+import { useMemo } from 'react'
+import { Box3, Vector3 } from 'three'
 import { useGLTF } from '@react-three/drei'
 
+export const ROBOT_ARM_GLB = '/robot_arm_assembly.glb'
+const SCALE = 0.5
+
+// No useGLTF.preload here on purpose: the file is ~30 MB and only loads when someone asks for it.
 const RobotArmModel = () => {
-  const group = useRef<Group>(null)
-  const { scene } = useGLTF('/robot_arm_assembly.glb')
-  
-  useEffect(() => {
-    if (group.current) {
-      // Calculate the bounding box of the model
-      const box = new Box3().setFromObject(group.current)
-      const center = new Vector3()
-      box.getCenter(center)
-      
-      // Get the minimum point (bottom-left-front corner)
-      const min = box.min
-      
-      // Offset the group so the bottom-left corner is at origin
-      group.current.position.set(-min.x, -min.y, -min.z)
-    }
+  const { scene } = useGLTF(ROBOT_ARM_GLB)
+
+  // Sit the model's bounding-box corner on the origin so it rests on the grid. Computed during
+  // render (not in an effect) so <Bounds> frames the camera on the final position.
+  const offset = useMemo(() => {
+    const min = new Box3().setFromObject(scene).min
+    return new Vector3(-min.x, -min.y, -min.z).multiplyScalar(SCALE)
   }, [scene])
-  
+
   return (
-    <group ref={group} scale={0.5}>
+    <group position={offset} scale={SCALE}>
       <primitive object={scene} />
     </group>
   )
 }
-
-// Preload the model
-useGLTF.preload('/robot_arm_assembly.glb')
 
 export default RobotArmModel

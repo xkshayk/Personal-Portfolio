@@ -1,86 +1,69 @@
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
+import { photos, timeline } from '../data/content'
+import { useLightbox } from './Lightbox'
+import Section from './Section'
 
 const About = () => {
-  const { elementRef: titleRef, isVisible: titleVisible } = useIntersectionObserver()
+  const open = useLightbox()
+  const items = photos.map((p) => ({ src: p.src, caption: p.caption, type: p.type }))
 
   return (
-    <section id="about" className="min-h-screen py-32 px-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="relative">
-          <h2 ref={titleRef as React.RefObject<HTMLHeadingElement>} className={`text-5xl md:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-16 ${titleVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>About Me</h2>
-          
-          {/* Profile Image - positioned absolutely to align with header */}
-          <div className="hidden md:block absolute top-0 right-0">
-            <img src="/Akshay Aquarium.png" alt="Profile" className="w-[500px] h-[500px] rounded-lg object-cover" />
-          </div>
-        </div>
-        
-        <div className="grid md:grid-cols-2 gap-4 mb-16">
-          {/* Bio */}
-          <div className="flex flex-col justify-start items-start">
-            <p className="text-xl md:text-2xl text-gray-900 dark:text-gray-100 leading-relaxed font-light text-left">
-              I'm a Mechanical Engineer student at the University of Toronto with a passion for aerodynamics and competiton. In the future I hope I can combine these interests in a career I love, like working for an F1 team or fighter jet development. I've outlined some of the projects I've been lucky enough to be a part of so far, and any feedback or just discussion would be awesome. 
-            </p>
-          </div>
-          
-          {/* Mobile Image placeholder */}
-          <div className="md:hidden flex items-start justify-center">
-            <img src="/Akshay Aquarium.png" alt="Profile" className="w-[420px] h-[420px] rounded-lg object-cover" />
-          </div>
+    <Section id="about" title="About">
+      <div className="grid md:grid-cols-12 gap-x-12 gap-y-10">
+        <div className="md:col-span-7 space-y-4 text-[18px] text-ink/85">
+          <p>
+            I like aerodynamics and I like competing, and engineering turns out to be a good way to do both. The long-term
+            goal is a career that combines them, ideally at an F1 team or in fighter-jet development.
+          </p>
+          <p>
+            Everything on this page is something I was lucky to be part of, with good teammates and mentors. If you have
+            feedback, or just want to talk about any of it, I’d genuinely like to hear from you.
+          </p>
         </div>
 
-        {/* Resume Button */}
-        <div className="flex justify-start mb-12">
-          <a
-            href="/Akshay Kolwalkar Resume Final.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white text-lg font-semibold rounded-lg shadow-lg hover:shadow-xl dark:shadow-white/20 dark:hover:shadow-white/30 transition-all duration-200 transform hover:scale-105"
-          >
-            Resume
-          </a>
-        </div>
-
-        {/* Timeline */}
-        <div className="mt-16">
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-teal-500 dark:from-cyan-600 dark:via-blue-600 dark:to-teal-600"></div>
-            
-            {/* Timeline points */}
-            <div className="grid grid-cols-4 gap-4">
-              {/* Point 1 - 2006 */}
-              <div className="flex flex-col items-center">
-                <div className="w-6 h-6 rounded-full bg-cyan-500 dark:bg-cyan-400 border-4 border-cyan-400 dark:border-slate-950 -mt-2.5 mb-10 z-10 relative"></div>
-                <p className="text-xl md:text-2xl text-gray-900 dark:text-gray-100 font-medium text-center mb-5">Born</p>
-                <p className="text-3xl md:text-4xl font-bold text-gray-700 dark:text-gray-300">2006</p>
-              </div>
-              
-              {/* Point 2 - 2013 */}
-              <div className="flex flex-col items-center">
-                <div className="w-6 h-6 rounded-full bg-blue-500 dark:bg-blue-400 border-4 border-cyan-400 dark:border-slate-950 -mt-2.5 mb-10 z-10 relative"></div>
-                <p className="text-xl md:text-2xl text-gray-900 dark:text-gray-100 font-medium text-center mb-5">Wanted to be Messi</p>
-                <p className="text-3xl md:text-4xl font-bold text-gray-700 dark:text-gray-300">2013</p>
-              </div>
-              
-              {/* Point 3 - 2019 */}
-              <div className="flex flex-col items-center">
-                <div className="w-6 h-6 rounded-full bg-teal-500 dark:bg-teal-400 border-4 border-cyan-400 dark:border-slate-950 -mt-2.5 mb-10 z-10 relative"></div>
-                <p className="text-xl md:text-2xl text-gray-900 dark:text-gray-100 font-medium text-center mb-5">Wanted to be Kevin Durant</p>
-                <p className="text-3xl md:text-4xl font-bold text-gray-700 dark:text-gray-300">2019</p>
-              </div>
-              
-              {/* Point 4 - 2025 */}
-              <div className="flex flex-col items-center">
-                <div className="w-6 h-6 rounded-full bg-cyan-600 dark:bg-cyan-500 border-4 border-cyan-400 dark:border-slate-950 -mt-2.5 mb-10 z-10 relative"></div>
-                <p className="text-xl md:text-2xl text-gray-900 dark:text-gray-100 font-medium text-center mb-5">Want to fly jets</p>
-                <p className="text-3xl md:text-4xl font-bold text-gray-700 dark:text-gray-300">2025</p>
-              </div>
-            </div>
-          </div>
+        <div className="md:col-span-5">
+          <p className="kicker mb-3">Career plans, abridged</p>
+          <ol className="border-l border-rule">
+            {timeline.map((t, i) => (
+              <li key={t.year} className="relative pl-5 pb-4 last:pb-0">
+                <span
+                  className={`absolute -left-[4.5px] top-[0.55em] w-2 h-2 rounded-full ${
+                    i === timeline.length - 1 ? 'bg-signal' : 'bg-paper border border-muted'
+                  }`}
+                />
+                <span className="font-mono text-[13px] text-muted mr-3">{t.year}</span>
+                <span className={i === timeline.length - 1 ? 'text-ink font-medium' : 'text-ink/80'}>{t.text}</span>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
-    </section>
+
+      <div className="mt-14">
+        <p className="kicker mb-4">Outside the CAD window</p>
+        <div className="columns-2 sm:columns-3 gap-3 [&>*]:mb-3">
+          {photos.map((p, i) => (
+            <button
+              key={p.src}
+              onClick={() => open(items, i)}
+              className="group block w-full break-inside-avoid text-left"
+              aria-label={`Open photo: ${p.caption}`}
+            >
+              {p.type === 'video' ? (
+                <div className="relative">
+                  <video src={p.src} muted playsInline preload="metadata" className="w-full rounded-[3px] bg-surface" />
+                  <span className="absolute left-2 top-2 font-mono text-[11px] bg-black/60 text-white px-1.5 py-0.5 rounded-[2px]">
+                    ▶ video
+                  </span>
+                </div>
+              ) : (
+                <img src={p.src} alt={p.caption} loading="lazy" decoding="async" className="w-full rounded-[3px] group-hover:opacity-90 transition-opacity" />
+              )}
+              <span className="block mt-1.5 text-[13px] text-muted leading-snug">{p.caption}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </Section>
   )
 }
 
