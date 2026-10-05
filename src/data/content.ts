@@ -61,7 +61,7 @@ export const experience: Experience[] = [
     dates: 'Jun 2025 – Aug 2025',
     location: 'Louisville, KY',
     summary:
-      'Worked on the production floor, then used a year of plant data to propose process, quality and maintenance changes to the area’s manufacturing engineers.',
+      'Worked multiple positions on the production floor, then used a year of plant data to propose process, quality and maintenance changes to the area’s manufacturing engineers.',
     bullets: [
       'Analysed **12 months of plant performance data** and proposed assembly-process designs projected to **increase units produced by 6%**.',
       'Developed production-quality recommendations with a **projected 16% reduction in defect rate**, presented to area manufacturing engineers for technical review.',
@@ -152,9 +152,10 @@ export const caseStudies: CaseStudy[] = [
     context: 'UTAT Space Systems · FINCH mission',
     dates: '2025 – now',
     intro: [
-      'FINCH is UTAT’s 3U CubeSat for hyperspectral imaging of crop residue. Before anyone trusts flight software, the team needs a model of how the spacecraft actually turns: orbit, sensors, estimator, controller and actuators, all in one closed loop.',
+      'FINCH was UTAT’s 3U CubeSat for hyperspectral imaging of crop residue. Before anyone trusts flight software, the team needs a model of how the spacecraft actually turns: orbit, sensors, estimator, controller and actuators, all in one closed loop.',
       'I built that loop in MATLAB/Simulink. It propagates a 500 km, 51.6° orbit with J2, samples a star tracker, fine sun sensor, magnetometer, IMU and GNSS at their own rates, and drives four pyramid-mounted reaction wheels and three magnetorquers through detumble, coarse and fine pointing modes, with torque, momentum and dipole limits enforced.',
       'Below is the real exported run, not an animation I made up. Scrub through it: the solid box is the true attitude and the outline is where the controller is trying to point.',
+      'FINCH isn’t Utat’s current mission anymore, as we’ve transitioned to the Canadian Space Agency’s 2026 CUBICS initiative, but the simulator is still useful for testing new control algorithms and for training new team members on how to use the ADCS.',
     ],
     facts: [
       { label: 'Initial pointing error', value: '96.2°' },

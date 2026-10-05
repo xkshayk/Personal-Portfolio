@@ -25,3 +25,7 @@ dist-ssr
 
 # Local Claude Code preview config
 .claude/
+
+# Cover letters: personal letters and generated PDFs stay local
+cover-letters/letters/
+cover-letters/output/

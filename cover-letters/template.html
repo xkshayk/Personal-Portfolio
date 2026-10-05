@@ -1,0 +1,28 @@
+<!doctype html>
+<!--
+  Default cover letter layout. Edit this file to change the look of EVERY letter.
+  Letter content lives in letters/*.txt; build.py fills in {{title}}, {{date}} and {{body}}.
+-->
+<html><head><meta charset="utf-8"><title>{{title}}</title>
+<style>
+@page { size: Letter; margin: 0.9in 1in; }
+body { font-family: "Calibri", "Segoe UI", Arial, sans-serif; font-size: 11pt; line-height: 1.4; color: #111; margin: 0; }
+h1 { font-size: 18pt; margin: 0 0 2pt; letter-spacing: 0.3pt; }
+.contact { font-size: 10pt; color: #333; padding-bottom: 8pt; border-bottom: 1px solid #999; margin-bottom: 16pt; }
+a { color: #1a4fa0; text-decoration: none; }
+p { margin: 0 0 10pt; }
+.date { margin-bottom: 12pt; }
+table { width: 100%; border-collapse: collapse; font-size: 10pt; line-height: 1.3; margin-top: 6pt; }
+th, td { border: 1px solid #bbb; padding: 4pt 6pt; text-align: left; vertical-align: top; }
+th { background: #eef2f8; }
+td:first-child, th:first-child { width: 34%; }
+</style></head><body>
+<h1>Akshay Kolwalkar</h1>
+<div class="contact">
+<a href="mailto:akshay.kolwalkar@mail.utoronto.ca">akshay.kolwalkar@mail.utoronto.ca</a> &middot;
+<a href="https://linkedin.com/in/akshay-kolwalkar">linkedin.com/in/akshay-kolwalkar</a> &middot;
+<a href="https://akshaykolwalkar.me">akshaykolwalkar.me</a>
+</div>
+<p class="date">{{date}}</p>
+{{body}}
+</body></html>
